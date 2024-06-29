@@ -31,6 +31,17 @@ var jump_time = jump_buffer
 var on_ground: bool = false
 
 func _process(_delta):
+	var mouse_position = get_global_mouse_position()
+	var pointerKazem = (mouse_position - position).normalized()
+	
+	position += pointerKazem * 200 * _delta
+	if pointerKazem.x > 0:
+		target_speed = 1.0
+	elif pointerKazem.x  < 0:
+		target_speed = -1.0 
+	elif pointerKazem.x  == 0:
+		target_speed = 0
+	
 	if target_speed < 0.0:
 		_Sprite.flip_h = true
 	elif target_speed > 0.0:
