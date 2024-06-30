@@ -2,9 +2,11 @@ extends Node
 
 @export var player_size: Vector2i = Vector2i(32, 32) # Should be the size of your character sprite, or slightly bigger
 @export_range(0, 19) var player_visibility_layer: int = 1
+@export_range(0, 19) var home: int = 1
 @export_range(0, 19) var world_visibility_layer: int = 0
 @export_node_path("Camera2D") var main_camera: NodePath
 @export var view_window: PackedScene
+@export var sprite_array :Array[Sprite2D] = []
 
 var world_offset: = Vector2i.ZERO
 
@@ -35,6 +37,7 @@ func _ready():
 	# To only see the character in the main window, we need to 
 	# move its sprite on a separate visibility layer from the world
 	# and set the main window to cull (not show) the world's visibility layer
+	_MainWindow.set_canvas_cull_mask_bit(home, true)
 	_MainWindow.set_canvas_cull_mask_bit(player_visibility_layer, true)
 	_MainWindow.set_canvas_cull_mask_bit(world_visibility_layer, false)
 	# -------------------------------------------
@@ -68,3 +71,10 @@ func create_view_window():
 	new_window.set_canvas_cull_mask_bit(player_visibility_layer, false)
 	new_window.set_canvas_cull_mask_bit(world_visibility_layer, true)
 	add_child(new_window)
+	
+#func _create_
+	
+	
+	
+	
+	

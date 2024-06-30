@@ -1,6 +1,7 @@
 extends Window
 
 @onready var _Camera: Camera2D = $ViewCamera
+@onready var _Camera_home: Camera2D = $ViewCamera1
 
 var world_offset: = Vector2i.ZERO
 var last_position: = Vector2i.ZERO

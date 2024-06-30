@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbpn4rtsqt00o"]
+[gd_scene load_steps=21 format=3 uid="uid://cbpn4rtsqt00o"]
 
 [ext_resource type="Script" path="res://scripts/Character.gd" id="1_ykho7"]
 [ext_resource type="Texture2D" uid="uid://b2tagd5wbxuwp" path="res://assets/sprites/player/player_animations-Sheet.png" id="2_af275"]
@@ -71,8 +71,6 @@ states/run/position = Vector2(501, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_tnphg"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_wrkyc"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_4njjt"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_0eq4b"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_e7ufj")]
 graph_offset = Vector2(-59, -77)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_wo16m"]
-
 [node name="Character" type="CharacterBody2D"]
 visibility_layer = 2
 script = ExtResource("1_ykho7")
@@ -97,8 +95,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_enqmf")
 anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_wo16m")
 
 [node name="Movement Provider" type="Node" parent="."]
 script = ExtResource("7_03k67")
