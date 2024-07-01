@@ -1,20 +1,23 @@
 extends Node
 
 @export var player_size: Vector2i = Vector2i(32, 32) # Should be the size of your character sprite, or slightly bigger
+@export var home_size: Vector2i = Vector2i(32, 32) # Should be the size of your character sprite, or slightly bigger
 @export_range(0, 19) var player_visibility_layer: int = 1
 @export_range(0, 19) var home: int = 1
 @export_range(0, 19) var world_visibility_layer: int = 0
 @export_node_path("Camera2D") var main_camera: NodePath
+@export_node_path("Camera2D") var home_camera: NodePath
 @export var view_window: PackedScene
 @export var sprite_array :Array[Sprite2D] = []
 
 var world_offset: = Vector2i.ZERO
 
 @onready var _MainCamera: Camera2D = get_node(main_camera)
+@onready var _HomeCamera: Camera2D = get_node(home_camera)
 @onready var _MainWindow: Window = get_window()
+@onready var _HomeWindow: Window 
 @onready var _MainScreen: int = _MainWindow.current_screen
 @onready var _MainScreenRect: Rect2i = DisplayServer.screen_get_usable_rect(_MainScreen)
-
 
 func _ready():
 	# ------------ MAIN WINDOW SETUP ------------
@@ -37,13 +40,31 @@ func _ready():
 	# To only see the character in the main window, we need to 
 	# move its sprite on a separate visibility layer from the world
 	# and set the main window to cull (not show) the world's visibility layer
-	_MainWindow.set_canvas_cull_mask_bit(home, true)
+	
+	var new_window2: Window = view_window.instantiate()
+	# Pass the main window's world to the new window
+	# This is what makes it possible to show the same world in multiple windows
+	new_window2.world_2d = _MainWindow.world_2d
+	new_window2.world_3d = _MainWindow.world_3d
+	# The new window needs to have the same world offset as the player
+	new_window2.world_offset = world_offset
+	# Contrarily to the main window, hide the player and show the world
+	new_window2.set_canvas_cull_mask_bit(home, false)
+	new_window2.set_canvas_cull_mask_bit(world_visibility_layer, true)
+	_HomeWindow = new_window2
+	add_child(new_window2)
+	
+	_HomeWindow.set_canvas_cull_mask_bit(home, true)
 	_MainWindow.set_canvas_cull_mask_bit(player_visibility_layer, true)
 	_MainWindow.set_canvas_cull_mask_bit(world_visibility_layer, false)
 	# -------------------------------------------
 	
 	# Position the world at the bottom-center of the screen
 	world_offset = Vector2i(_MainScreenRect.size.x / 2, _MainScreenRect.size.y)
+	#_create_world_windowss()
+	_HomeWindow.position = get_window_pos_from_camera2()
+	
+
 
 func _process(delta):
 	# Update the main window's position
@@ -58,6 +79,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func get_window_pos_from_camera()->Vector2i:
 	return (Vector2i(_MainCamera.global_position + _MainCamera.offset) - player_size / 2) * Vector2i(_MainCamera.zoom) + world_offset
+func get_window_pos_from_camera2()->Vector2i:
+	return (Vector2i(_HomeCamera.global_position + _HomeCamera.offset) - home_size / 2) * Vector2i(_HomeCamera.zoom) + world_offset
 
 func create_view_window():
 	var new_window: Window = view_window.instantiate()
@@ -71,8 +94,21 @@ func create_view_window():
 	new_window.set_canvas_cull_mask_bit(player_visibility_layer, false)
 	new_window.set_canvas_cull_mask_bit(world_visibility_layer, true)
 	add_child(new_window)
-	
-#func _create_
+		
+func _create_world_windowss():
+	for sprite in sprite_array:
+		print("creating new world windows")
+		var new_world_window : Window = view_window.instantiate()
+		new_world_window.position = sprite.global_position - (sprite.scale *  Vector2(59, 59)/2)
+		new_world_window.size = sprite.scale * Vector2(59,59)
+		
+		new_world_window.world_2d = _MainWindow.world_2d
+		new_world_window.world_3d = _MainWindow.world_3d
+		
+		add_child(new_world_window)
+		
+		
+		
 	
 	
 	

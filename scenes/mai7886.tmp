@@ -14,13 +14,16 @@ size = Vector2(20, 8)
 
 [node name="Main" type="Node" node_paths=PackedStringArray("sprite_array")]
 script = ExtResource("1_t1gte")
+player_size = null
+player_visibility_layer = null
+home = null
+world_visibility_layer = null
 main_camera = NodePath("Character/Camera2D")
-home_camera = NodePath("Sprite2D/Camera2D2")
 view_window = ExtResource("2_8qonj")
 sprite_array = [NodePath("Sprite2D")]
 
 [node name="Character" parent="." instance=ExtResource("2_hgbp2")]
-position = Vector2(-68, -79)
+position = Vector2(0, -80)
 
 [node name="Camera2D" type="Camera2D" parent="Character"]
 offset = Vector2(0, -16)
@@ -43,5 +46,3 @@ texture = ExtResource("5_w330f")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_6eb2e")
-
-[node name="Camera2D2" type="Camera2D" parent="Sprite2D"]
