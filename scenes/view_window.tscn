@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/ViewWindow.gd" id="1_xh535"]
 
-[node name="ViewWindow" type="Window"]
-initial_position = 1
+[node name="CreatingWindow" type="Window"]
 title = "View World"
+initial_position = 1
 size = Vector2i(512, 512)
 script = ExtResource("1_xh535")
 

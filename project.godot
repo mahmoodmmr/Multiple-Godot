@@ -26,6 +26,10 @@ window/size/viewport_width=1080
 window/size/viewport_height=720
 window/per_pixel_transparency/allowed=true
 
+[dotnet]
+
+project/assembly_name="Multiple Windows tutorial"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")

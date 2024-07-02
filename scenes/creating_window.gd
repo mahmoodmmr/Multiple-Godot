@@ -6,11 +6,22 @@ var world_offset: = Vector2i.ZERO
 var last_position: = Vector2i.ZERO
 var velocity: = Vector2i.ZERO
 var focused: = false
-var enable_border = false
+
+var enable_border = true
+var enable_unresizable = true
+var enable_always_on_top = true
+var enable_gui_embed_subwindows = false
+var enable_transparent = true
+var enable_transparent_bg = true
 
 func _ready() -> void:
-	# Set the anchor mode to "Fixed top-left"
-	# Easier to work with since it corresponds to the window coordinates
+	#borderless = enable_border
+	unresizable = enable_unresizable
+	always_on_top = enable_always_on_top	# Force the window always be on top of the screen
+	gui_embed_subwindows = enable_gui_embed_subwindows # Make subwindows actual system windows <- VERY IMPORTANT
+	#transparent = enable_transparent		# Allow the window to be transparent
+	#transparent_bg = enable_transparent_bg	# Make the window's background transparent
+	
 	_Camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
 	
 	transient = true # Make the window considered as a child of the main window
