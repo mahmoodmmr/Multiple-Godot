@@ -45,39 +45,10 @@ func _ready():
 	# and set the main window to cull (not show) the world's visibility layer
 	
 	#_HomeWindow.set_canvas_cull_mask_bit(home_visibility_layer, true)
-	#var new_window2: Window = view_window.instantiate()
-
-
-	#new_window2.world_2d = _MainWindow.world_2d
-	#new_window2.world_3d = _MainWindow.world_3d
-
-	#new_window2.world_offset = world_offset
-
-	#new_window2.set_canvas_cull_mask_bit(home_visibility_layer, false)
-	#new_window2.set_canvas_cull_mask_bit(world_visibility_layer, true)
-	#_HomeWindow = new_window2
-	#add_child(new_window2)
-	#
-	##_HomeWindow.borderless = true		# Hide the edges of the window
-	##_HomeWindow.unresizable = true		# Prevent resizing the window
-	#_HomeWindow.always_on_top = true	# Force the window always be on top of the screen
-	##_HomeWindow.gui_embed_subwindows = false # Make subwindows actual system windows <- VERY IMPORTANT
-	##_HomeWindow.transparent = false		# Allow the window to be transparent
-	##_HomeWindow.transparent_bg = true	# Make the window's background transparent
-	#_HomeWindow.min_size = home_size * Vector2i(_HomeCamera.zoom) * 4
-	#_HomeWindow.size = _HomeWindow.min_size
-	#
-	#
-	#
-	#_HomeWindow.set_canvas_cull_mask_bit(home_visibility_layer, true)
 	_MainWindow.set_canvas_cull_mask_bit(player_visibility_layer, true)
 	_MainWindow.set_canvas_cull_mask_bit(world_visibility_layer, false)
 	# -------------------------------------------
 	# Position the world at the bottom-center of the screen
-	
-
-	
-	
 	world_offset = Vector2i(_MainScreenRect.size.x / 2, _MainScreenRect.size.y)
 
 var ttttt = true
@@ -87,9 +58,6 @@ func _process(delta):
 	if(ttttt):
 		#_HomeWindow = creating_window.instantiate()
 		_HomeWindow = create_view_window()
-
-
-#
 		#_HomeWindow.world_2d = _HomeWindow.world_2d
 		#_HomeWindow.world_3d = _HomeWindow.world_3d
 		### The new window needs to have the same world offset as the player
