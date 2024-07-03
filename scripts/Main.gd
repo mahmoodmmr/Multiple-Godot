@@ -1,7 +1,7 @@
 extends Node
 
 @export var player_size: Vector2i = Vector2i(32, 32) # Should be the size of your character sprite, or slightly bigger
-@export var home_size: Vector2i = Vector2i(32, 32) # Should be the size of your character sprite, or slightly bigger
+@export var home_size: Vector2i = Vector2i(64, 64) # Should be the size of your character sprite, or slightly bigger
 @export_range(0, 19) var player_visibility_layer: int = 1
 @export_range(0, 19) var home_visibility_layer: int = 1
 @export_range(0, 19) var world_visibility_layer: int = 0
@@ -9,6 +9,7 @@ extends Node
 @export_node_path("Camera2D") var home_camera: NodePath
 @export var view_window: PackedScene
 @export var creating_window: PackedScene
+@export var CSharpGettingWindows : Node2D
 @export var sprite_array :Array[Sprite2D] = []
 
 var world_offset: = Vector2i.ZERO
@@ -21,6 +22,7 @@ var world_offset: = Vector2i.ZERO
 @onready var _MainScreenRect: Rect2i = DisplayServer.screen_get_usable_rect(_MainScreen)
 
 func _ready():
+	CSharpGettingWindows.CSharpFunc()
 	# ------------ MAIN WINDOW SETUP ------------
 	# Enable per-pixel transparency, required for transparent windows but has a performance cost
 	# Can also break on some systems
@@ -85,8 +87,8 @@ func _process(delta):
 	if(ttttt):
 		#_HomeWindow = creating_window.instantiate()
 		_HomeWindow = create_view_window()
-		_HomeWindow.min_size =home_size * Vector2i(_HomeCamera.zoom)
-		_HomeWindow.size = _HomeWindow.min_size
+
+
 #
 		#_HomeWindow.world_2d = _HomeWindow.world_2d
 		#_HomeWindow.world_3d = _HomeWindow.world_3d
@@ -96,9 +98,11 @@ func _process(delta):
 		#_HomeWindow.set_canvas_cull_mask_bit(home_visibility_layer, false)
 		#_HomeWindow.set_canvas_cull_mask_bit(world_visibility_layer, true)
 		#add_child(_HomeWindow)
-		_HomeWindow.borderless = true
+
 		
+		_HomeWindow.borderless = false
 		ttttt = false
+	#_HomeWindow.borderless = true
 	_HomeWindow.position = get_window_pos_from_camera2()
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -121,10 +125,13 @@ func create_view_window()->Window:
 	new_window.world_3d = _MainWindow.world_3d
 	# The new window needs to have the same world offset as the player
 	new_window.world_offset = world_offset
+	#new_window.camera = _HomeCamera
 	# Contrarily to the main window, hide the player and show the world
 	new_window.set_canvas_cull_mask_bit(player_visibility_layer, false)
 	new_window.set_canvas_cull_mask_bit(world_visibility_layer, true)
 	add_child(new_window)
+	new_window.min_size =home_size * Vector2i(_HomeCamera.zoom)
+	new_window.size = home_size
 	return new_window
 		
 func _create_world_windowss():

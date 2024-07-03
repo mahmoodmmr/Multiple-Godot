@@ -1,20 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bswp71hrqe6mk"]
+[gd_scene load_steps=8 format=3 uid="uid://bswp71hrqe6mk"]
 
 [ext_resource type="Script" path="res://scripts/Main.gd" id="1_t1gte"]
 [ext_resource type="PackedScene" uid="uid://c3464rjd3hxek" path="res://scenes/view_window.tscn" id="2_becsi"]
 [ext_resource type="PackedScene" uid="uid://cbpn4rtsqt00o" path="res://scenes/character.tscn" id="2_hgbp2"]
 [ext_resource type="PackedScene" uid="uid://bxhu3dinw1rvu" path="res://scenes/creating_window.tscn" id="3_1ttec"]
 [ext_resource type="PackedScene" uid="uid://dpyk4ti0kc51c" path="res://scenes/Charactor_home.tscn" id="4_tf38w"]
+[ext_resource type="Script" path="res://scripts/GettingWindow.cs" id="6_yc1dy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01vtp"]
 size = Vector2(823, 20)
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("CSharpGettingWindows")]
 script = ExtResource("1_t1gte")
 main_camera = NodePath("Character/Camera2D")
 home_camera = NodePath("CharacterBody2D/Camera2D2")
 view_window = ExtResource("2_becsi")
 creating_window = ExtResource("3_1ttec")
+CSharpGettingWindows = NodePath("Node2D")
 
 [node name="Character" parent="." instance=ExtResource("2_hgbp2")]
 position = Vector2(-68, -79)
@@ -28,7 +30,11 @@ zoom = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_01vtp")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_tf38w")]
-position = Vector2(47, -53)
+position = Vector2(0, -1)
 
 [node name="Camera2D2" type="Camera2D" parent="CharacterBody2D"]
+offset = Vector2(0, -32)
 zoom = Vector2(3, 3)
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("6_yc1dy")
