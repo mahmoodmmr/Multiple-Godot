@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cbpn4rtsqt00o" path="res://scenes/character.tscn" id="2_hgbp2"]
 [ext_resource type="PackedScene" uid="uid://bxhu3dinw1rvu" path="res://scenes/creating_window.tscn" id="3_1ttec"]
 [ext_resource type="PackedScene" uid="uid://dpyk4ti0kc51c" path="res://scenes/Charactor_home.tscn" id="4_tf38w"]
-[ext_resource type="Script" path="res://scripts/GettingWindow.cs" id="6_yc1dy"]
+[ext_resource type="Script" path="res://scripts/GettingWindow.cs" id="6_mfa2j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_01vtp"]
 size = Vector2(823, 20)
@@ -37,4 +37,4 @@ offset = Vector2(0, -32)
 zoom = Vector2(3, 3)
 
 [node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("6_yc1dy")
+script = ExtResource("6_mfa2j")

@@ -80,15 +80,17 @@ public partial class GettingWindow : Node2D
 	
 	public void CSharpFunc(){
 		GD.Print("this is kazem c#");
-				EnumWindows(new EnumWindowsProc(EnumTheWindows), IntPtr.Zero);
+		EnumWindows(new EnumWindowsProc(EnumTheWindows), IntPtr.Zero);
 
 		// Print window information
 		foreach (var window in windows)
 		{
 			Console.WriteLine($"Title: {window.Title}, Handle: {window.Handle}, Rectangle: {window.Rectangle.Left},{window.Rectangle.Top},{window.Rectangle.Right},{window.Rectangle.Bottom}");
-		GD.Print("this is kazem c#");
+			GD.Print("this is kazem c#");
 			GD.Print($"Title: {window.Title}, Handle: {window.Handle}, Rectangle: {window.Rectangle.Left},{window.Rectangle.Top},{window.Rectangle.Right},{window.Rectangle.Bottom}");
-		
 		}
 	}
+	
+	
+	
 }
