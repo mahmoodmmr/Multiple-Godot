@@ -100,5 +100,7 @@ anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("7_03k67")
 action_left = "move_left"
 action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
 action_jump = "move_up"
 character = NodePath("..")

@@ -21,10 +21,13 @@ extends CharacterBody2D
 
 # Provided values
 var dir: float = 0.0
+var dir_ver: float = 0.0
 var jump: bool = false
 
 var target_speed: float = 0.0
 var target_accel: float = 0.0
+var target_speed_ver: float = 0.0
+var target_accel_ver: float = 0.0
 var target_gravity: float = gravity_strong
 var air_time = air_buffer
 var jump_time = jump_buffer
@@ -64,11 +67,15 @@ func _physics_process(delta):
 	# Vertical movement
 	if velocity.y > 0 or (not jump and jump_time < jump_buffer):
 		target_gravity = gravity_strong
-	velocity.y += target_gravity * delta
+	#velocity.y += target_gravity * delta
 	# Horizontal movement
 	target_speed = dir * max_speed
 	target_accel = acceleration if dir and sign(dir) == sign(velocity.x) else deceleration
 	velocity.x = move_toward(velocity.x, target_speed, target_accel * delta)
+	
+	target_speed_ver = dir_ver * max_speed
+	target_accel_ver = acceleration if dir_ver and sign(dir_ver) == sign(velocity.y) else deceleration
+	velocity.y = move_toward(velocity.y, target_speed_ver, target_accel_ver * delta)
 	
 	# Apply velocity
 	var collision = move_and_slide()
@@ -85,20 +92,20 @@ func _physics_process(delta):
 		jump_time = min(jump_time + delta, jump_buffer)
 	
 	# Apply jump / landing
-	if jump_time < jump_buffer and air_time < air_buffer:
-		do_jump()
-	elif landed:
-		do_land()
+	#if jump_time < jump_buffer and air_time < air_buffer:
+		#do_jump()
+	#elif landed:
+		#do_land()
 
 func do_jump()->void:
 	# Movement variables
-	velocity.y = -sqrt(jump_height * 2.0 * gravity)
-	target_gravity = gravity
+	velocity.y = -sqrt(jump_height * 2.0)
+	#target_gravity = gravity
 	
 	# Status variables
 	jump_time = jump_buffer
 	air_time = air_buffer
-	on_ground = false
+	on_ground = true
 	
 	# Animation and effects
 	_StateMachine.travel("jump")

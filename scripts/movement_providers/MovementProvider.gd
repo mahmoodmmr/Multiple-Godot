@@ -6,12 +6,14 @@ class_name MovementProvider
 
 @export var enabled: bool = true
 var provider_dir: float = 0.0
+var provider_dir_ver: float = 0.0
 var provider_jump: bool = false
 
 func _process(delta):
 	if _Character:
 		if enabled:
 			_Character.dir = provider_dir
+			_Character.dir_ver = provider_dir_ver
 			_Character.jump = provider_jump
 		else:
 			_Character.dir = 0.0
